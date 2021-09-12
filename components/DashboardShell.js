@@ -1,6 +1,7 @@
 import { useAuth } from '@/lib/auth';
 import { Flex } from '@chakra-ui/layout';
 import {
+  Button,
   Icon,
   Link,
   Stack,
@@ -30,8 +31,12 @@ const DashboardShell = ({ children }) => {
           <Link>Sites</Link>
         </Stack>
         <Flex alignItems="center">
-          <Link mr={4}>Account</Link>
-          <Avatar size="sm" src={auth.user.photoUrl} />
+          {auth.user && (
+            <Button variant="ghost" mr={2} onClick={() => signOut()}>
+              Log Out
+            </Button>
+          )}
+          <Avatar size="sm" src={auth?.user?.photoURL} />
         </Flex>
       </Flex>
       <Flex backgroundColor="gray.100" p={8} height="100vh">

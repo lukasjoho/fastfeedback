@@ -1,11 +1,21 @@
 import { useAuth } from '@/lib/auth';
 
 import EmptyState from '@/components/EmptyState';
+import SiteTableSkeleton from '@/components/SiteTableSkeleton';
+import DashboardShell from '@/components/DashboardShell';
 
 export default function Dashbboard() {
   const auth = useAuth();
   if (!auth.user) {
-    return 'Loading...';
+    return (
+      <DashboardShell>
+        <SiteTableSkeleton />
+      </DashboardShell>
+    );
   }
-  return <EmptyState />;
+  return (
+    <DashboardShell>
+      <EmptyState />
+    </DashboardShell>
+  );
 }
