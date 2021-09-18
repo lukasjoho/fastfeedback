@@ -14,6 +14,7 @@ import {
 import { LogoIcon } from 'Icons';
 import React from 'react';
 import AddSiteModal from './AddSiteModel';
+import NextLink from 'next/link';
 
 const DashboardShell = ({ children }) => {
   const auth = useAuth();
@@ -27,13 +28,19 @@ const DashboardShell = ({ children }) => {
         px={8}
       >
         <Stack isInline spacing={4} align="center ">
-          <LogoIcon />
-          <Link>Feedback</Link>
-          <Link>Sites</Link>
+          <NextLink href="/" passHref>
+            <LogoIcon />
+          </NextLink>
+          <NextLink href="/dashboard" passHref>
+            <Link>Feedback</Link>
+          </NextLink>
+          <NextLink href="/feedback" passHref>
+            <Link>Sites</Link>
+          </NextLink>
         </Stack>
         <Flex alignItems="center">
           {auth.user && (
-            <Button variant="ghost" mr={2} onClick={() => signOut()}>
+            <Button variant="ghost" mr={2} onClick={() => auth.signout()}>
               Log Out
             </Button>
           )}
@@ -42,15 +49,6 @@ const DashboardShell = ({ children }) => {
       </Flex>
       <Flex backgroundColor="gray.100" p={8} height="100vh">
         <Flex maxWidth="800px" w="100%" direction="column" ml="auto" mr="auto">
-          <Breadcrumb>
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink color="gray.700">Sites</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          <Flex justifyContent="space-between" mb={8}>
-            <Heading color="black">Sites</Heading>
-            <AddSiteModal>+ Add Site</AddSiteModal>
-          </Flex>
           {children}
         </Flex>
       </Flex>

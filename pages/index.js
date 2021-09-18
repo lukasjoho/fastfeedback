@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { useAuth } from '@/lib/auth';
 import { Button } from '@chakra-ui/button';
 import { Heading } from '@chakra-ui/layout';
-import { Flex, Icon } from '@chakra-ui/react';
-import { LogoIcon } from 'Icons';
+import { Flex, Icon, Stack } from '@chakra-ui/react';
+import { GithubIcon, GoogleIcon, LogoIcon } from 'Icons';
 import EmptyState from '@/components/EmptyState';
 export default function Home() {
   const auth = useAuth();
@@ -24,12 +24,27 @@ export default function Home() {
         <div>{auth?.user?.email}</div>
         {auth?.user ? (
           <>
-            <Button onClick={(e) => auth.signout()}>Sign Out</Button>
+            <Button onClick={(e) => auth.signout()}>View Dashboard</Button>
           </>
         ) : (
-          <Button mt={4} size="sm" onClick={(e) => auth.signInWithGithub()}>
-            Sign In
-          </Button>
+          <Stack>
+            <Button
+              leftIcon={<GithubIcon />}
+              mt={4}
+              size="sm"
+              onClick={(e) => auth.signInWithGithub()}
+            >
+              Sign In With Github
+            </Button>
+            <Button
+              leftIcon={<GoogleIcon />}
+              mt={4}
+              size="sm"
+              onClick={(e) => auth.signInWithGoogle()}
+            >
+              Sign In With Google
+            </Button>
+          </Stack>
         )}
       </Flex>
     </div>
